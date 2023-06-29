@@ -1,0 +1,536 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+#include "Estudante.h"
+
+void mostrar_universidades(int x){
+  cout << "\n\nUniversidades disponíveis: ";
+  cout << "\n1-Universidade 1\n2-Universidade 2\nSelecione: ";
+  cin >> x;  
+}
+
+void nota_corte(float nota, float corte){ 
+  if (nota >= corte){
+    system("clear");
+   cout << "\n\n==========================================================================\n";
+   cout << "PARABÉNS! SUA CANDIDATURA FOI REALIZADA, AGUARDE MAIS INFORMAÇÕES POR E-MAIL!\n";
+   cout << "=========================================================================";
+  } else {
+    system("clear");
+   cout << "\n\n================================================================================\n";
+   cout << "||SUA NOTA NÃO É O SUFICIENTE, TENTE NOVAMENTE EM OUTRA UNIVERSIDADE OU OUTRO CURSO! ||\n";
+   cout << "=================================================================================";
+  }
+}
+
+
+int main(){
+  string nome, senha, regnome, regsenha;
+  int cpf;
+  unsigned int cont = 0, opcao1, curso, uni, opcao, oi, opcao2;
+  float nota;
+  
+  //LISTAS DOS ALUNOS CANDIDATADOS
+  Estudante* lista_alunos[5];        //CONTADORES DE PESSOAS EM DETERMINADA REGIAO, CURSO E UNIVERSIDADE
+  Estudante* lista_psicoRSuni1[5]; int contpsicoRS1 = 0;  
+  Estudante* lista_psicoRSuni2[5]; int contpsicoRS2 = 0;
+  Estudante* lista_psicoMGuni1[5]; int contpsicoMG1 = 0;
+  Estudante* lista_psicoMGuni2[5]; int contpsicoMG2 = 0;
+  Estudante* lista_ccRSuni1[5]; int contccRS1 = 0;      
+  Estudante* lista_ccRSuni2[5]; int contccRS2 = 0;
+  Estudante* lista_matematicaSPuni1[5]; int contmatSP1 = 0;
+  Estudante* lista_matematicaSPuni2[5]; int contmatSP2 = 0;
+  Estudante* lista_pedagogiaSPuni1[5];  int contpedagogiaSP1 = 0;
+  Estudante* lista_pedagogiaSPuni2[5];  int contpedagogiaSP2 = 0;
+  Estudante* lista_edfisicaRSuni1[5]; int contedfRS1 = 0;
+  Estudante* lista_edfisicaRSuni2[5];  int contedfRS2 = 0;
+  Estudante* lista_letrasSPuni1[5];  int contletrasSP1 = 0;
+  Estudante* lista_letrasSPuni2[5];  int contletrasSP2 = 0;
+  Estudante* lista_cdMGuni1[5];  int contcdMG1 = 0;
+  Estudante* lista_cdMGuni2[5];  int contcdMG2 = 0;
+  Estudante* lista_artesuni1[5];  int contartes1 = 0;
+  Estudante* lista_artesuni2[5];  int contartes2 = 0;
+  
+  while (opcao != 4){
+  cout << "\n\n==============APPROVEI===============\n";
+  cout << "=====================================\n";
+  cout << "|| 1- Entrar                       ||\n";
+  cout << "|| 2- Cadastrar                    ||\n";
+  cout << "|| 3- Lista de Candidaturas        ||\n";
+  cout << "|| 4- Sair                         ||\n";
+  cout << "=====================================\n";
+  cout << "Selecione: ";
+  cin >> opcao;
+  if (opcao == 2){             // CADASTRAR USUÁRIO
+    system("clear");
+    cout << "========================================\n";
+    cout << "||              CADASTRO              ||\n";
+    cout << "========================================";
+    
+    cout << "\n\nDigite seu nome(este sera seu login): "; //NOME
+    cin >> regnome;
+    
+    cout << "\nDigite seu CPF: ";     //CPF
+    cin >> cpf;
+    
+    cout << "\nSua senha: ";          //SENHA
+    cin >> regsenha;
+    
+    cout << "\nNota do ENEM: ";     //NOTA ENEM
+    cin >> nota;
+    
+    cout << "==============================================\n";
+    cout << "||           USUÁRIO CADASTRADO             ||\n";
+    cout << "|| PRESSIONE QUALQUER NUMERO PARA CONTINUAR ||\n";
+    cout << "==============================================\n>>> ";
+    cin >> oi;
+    system("clear");
+  }  else if (opcao == 1){          //LOGIN
+    cout << "\nLogin: ";
+    cin >> nome; 
+
+    cout << "\n\nSenha: ";
+    cin >> senha;
+
+    while (nome != regnome || senha != regsenha){    // LOOP PARA CREDENCIAIS INCORRETAS
+      cout << "==============LOGIN INCORRETO==============\n";
+      cout << "==============TENTE NOVAMENTE==============\n";
+
+      cout << "\nLogin: ";
+      cin >> nome;
+
+      cout << "\n\nSenha: ";
+      cin >> senha;
+    }
+    system("clear");
+    cout << "\n\n==============APPROVEI==============";        // PAGINA INICIAL
+    cout << "\n=====Seja Bem Vindo(a), " << nome << "!======";
+    cout << "\n====================================";
+
+    cout << "\n Deseja editar sua nota?\n1-Sim\n2-Não\nSelecione: ";
+    cin >> opcao2;
+    if (opcao2 == 1){
+      cout << "Digite sua nota atualizada:\nNota: ";
+      cin >> nota;
+      cout << "\n=================================================";
+      
+    } else if (opcao2 == 2){
+    lista_alunos[cont] = new Estudante(regnome, cpf, regsenha, nota);
+    cout << "\n\nDigite qual estado deseja encontrar sua universidade: \n";
+    cout << "1-RS\n\n2-SP\n\n3-MG\n\nSelecione: ";
+    cin >> opcao1;
+
+    if (opcao1 == 1){            // UNIVERSIDADE NO RS
+    cout << "\n\nDigite o curso que deseja se candidatar:\n";      
+    cout << "1-Ciência da computação\n\n2-Psicologia\n\n3-Ed. Física\n\nSelecione: ";
+    cin >> curso;
+
+      if (curso == 1){    // CIENCIA DA COMPUTACAO
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n\n2-Universidade 2\n\nSelecione: ";
+        cin >> uni;  
+        
+        if (uni == 1){     // ESCOLHA UNIVERSIDADE 1
+          if (nota >= 700){
+            lista_ccRSuni1[contccRS1] = lista_alunos[cont];//ADICIONA À LISTA DE CANDIDATOS EM CIENCIA DA COMPUTACAO
+            cont++; // SOMA +1 AO CONTADOR DE ALUNOS
+            contccRS1++;  // SOMA +1 AO CONTADOR DA LISTA DE CIENCIA DA COMPUTACAO RS UNIVERSIDADE 1
+            
+          }
+          nota_corte(nota, 700);
+        } else if (uni == 2){     // ESCOLHA UNIVERSIDADE 2
+          if (nota >= 570){
+            lista_ccRSuni2[contccRS2] = lista_alunos[cont];  // ADICIONA À LISTA DE CANDIDATOS EM CIENCIA DA COMPUTACAO
+            cont++;
+            contccRS2++;
+          }
+          nota_corte(nota, 570);
+        }
+    } else if (curso == 2){       // CURSO PSICOLOGIA
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n\n2-Universidade 2\n\nSelecione: ";
+        cin >> uni;  
+
+        if (uni == 1){
+          if (nota >= 600){
+            lista_psicoRSuni1[contpsicoRS1] = lista_alunos[cont];  // ADICIONA À LISTA DE CANDIDATOS EM PSICOLOGIA
+            cont++;
+            contpsicoRS1++;
+            system("clear");
+          }
+          nota_corte(nota, 600);
+        } else if (uni == 2){
+          if (nota >= 400){
+            lista_psicoRSuni2[contpsicoRS2] = lista_alunos[cont]; // ADICIONA À LISTA DE CANDIDATOS EM PSICOLOGIA
+            cont++;
+            contpsicoRS2++;
+            system("clear");
+          }
+          nota_corte(nota, 400);
+        }
+    } else if (curso == 3){                // CURSO DE ED FISICA
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n\n2-Universidade 2\n\nSelecione: ";
+        cin >> uni; 
+
+        if (uni == 1){
+          if (nota >= 470){
+            lista_edfisicaRSuni1[contedfRS1] = lista_alunos[cont]; // ADICIONA À LISTA DE CANDIDATOS EM ED FISICA
+            cont++;
+            contedfRS1++;
+            system("clear");
+          }
+          nota_corte(nota, 470);
+        } else if (uni == 2){
+          if (nota >= 540){
+            lista_edfisicaRSuni2[contedfRS2] = lista_alunos[cont]; // ADICIONA À LISTA DE CANDIDATOS EM ED FISICA
+            cont++;
+            contedfRS2++;
+            system("clear");
+          }
+          nota_corte(nota, 540);
+        }
+    }
+  } else if (opcao1 == 2){  // CURSOS / UNIVERSIDADES EM SAO PAULO
+      cout << "\n\nDigite o curso que deseja se candidatar: \n";  
+      cout << "1-Matemática\n\n2-Letras\n\n3-Pedagogia\n\nSelecione: ";
+      cin >> curso;
+      if (curso == 1){
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n\n2-Universidade 2\n\nSelecione: ";
+        cin >> uni;    
+        if (uni == 1){
+          if (nota >= 700){
+            lista_matematicaSPuni1[contmatSP1] = lista_alunos[cont]; // ADICIONA À LISTA DE CANDIDATOS EM MATEMATICA
+            cont++;
+            contmatSP1++;
+            system("clear");
+          }
+          nota_corte(nota, 700);
+        } else if (uni == 2){
+          if (nota >= 630){
+            lista_matematicaSPuni2[contmatSP2] = lista_alunos[cont]; // ADICIONA À LISTA DE CANDIDATOS EM MATEMATICA
+            cont++;
+            contmatSP2++;
+            system("clear");
+          }
+          nota_corte(nota, 630);
+        }
+      } else if (curso == 2){
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n\n2-Universidade 2\n\nSelecione: ";
+        cin >> uni; 
+        
+          if (uni == 1){
+            if (nota >= 650){
+            lista_letrasSPuni1[contletrasSP1] = lista_alunos[cont]; // ADICIONA À LISTA DE CANDIDATOS EM LETRAS
+            cont++;
+            contletrasSP1++;
+            system("clear");
+          }
+          nota_corte(nota, 650);
+        } else if (uni == 2){
+            if (nota >= 680){
+            lista_letrasSPuni2[contletrasSP2] = lista_alunos[cont]; // ADICIONA À LISTA DE CANDIDATURAS EM LETRAS
+            cont++;
+            contletrasSP2++;
+            system("clear");
+          }
+          nota_corte(nota, 680);
+        }
+      } else if (curso == 3){
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n\n2-Universidade 2\n\nSelecione: ";
+        cin >> uni; 
+          if (uni == 1){
+            if (nota >= 580){
+            lista_pedagogiaSPuni1[contpedagogiaSP1] = lista_alunos[cont]; // ADICIONA À LISTA DE CANDIDATURAS EM PEDAGOGIA
+            cont++;
+            contpedagogiaSP1++;
+            system("clear");
+          }
+          nota_corte(nota, 580);
+        } else if (uni == 2){
+            if (nota >= 620){
+            lista_pedagogiaSPuni2[contpedagogiaSP2] = lista_alunos[cont]; // ADICIONA À LISTA DE CADASTRADOS EM PEDAGOGIA
+            cont++;
+            contpedagogiaSP2++;
+            system("clear");
+          }
+          nota_corte(nota, 620);
+        }
+      }
+  } else if (opcao1 == 3){ //CURSOS / UNIVERSIDADES EM MINAS GERAIS
+      cout << "\n\nDigite o curso que deseja se candidatar:\n";  
+      cout << "1-Ciência de Dados\n\n2-Psicologia\n\n3-Artes\n\nSelecione: ";
+      cin >> curso;
+      if (curso == 1){
+        cout << "\n\nLista de Universidades disponíveis: ";
+        cout << "\n1-Universidade 1\n\n2- Universidade 2\n\nSelecione: ";
+        cin >> uni;
+        if (uni == 1){
+          if (nota >= 650){
+            lista_cdMGuni1[contcdMG1] = lista_alunos[cont]; // ADICIONA ESTUDANTE À LISTA DE CADASTRADOS EM CIENCIA DE DADOS
+            cont++;
+            contcdMG1++;
+          }
+          nota_corte(nota, 650);  // FUNÇAO NOTA DE CORTE PARA AVALIAR SE O ALUNO É APTO PARA TAL CURSO
+        } else if (uni == 2){
+          if (nota >= 635){
+            lista_cdMGuni2[contcdMG2] = lista_alunos[cont]; // ADICIONA ESTUDANTE À LISTA DE CANDIDATURAS EM CIENCIA DE DADOS
+            cont++;
+            contcdMG2++;
+          }
+          nota_corte(nota, 635);
+        }
+      } else if (curso == 2){
+          cout << "\n\nLista de Universidades disponíveis: ";
+          cout << "\n1-Universidade 1\n\n2-Universidade 2\n\nSelecione: ";
+          cin >> uni;
+          if (uni == 1){
+            if (nota >= 720){
+            lista_psicoMGuni1[contpsicoMG1] = lista_alunos[cont]; // ADICIONA ESTUDANTE À LISTA DE CANDIDATURAS EM PSICOLOGIA MG
+            cont++;
+            contpsicoMG1++;
+          }
+          nota_corte(nota, 720);
+        } else if (uni == 2){
+            if (nota >= 720){
+            lista_psicoMGuni2[contpsicoMG2] = lista_alunos[cont]; // ADICIONA ESTUDANTE À LISTA DE CANDIDATURAS EM PSICOLOGIA MG
+            cont++;
+            contpsicoMG2++;
+          }
+          nota_corte(nota, 680);
+        }
+      } else if (curso == 3){
+          cout << "\n\nLista de Universidades disponíveis: ";
+          cout << "\n1-Universidade 1\n\n2-Universidade 2\n\nSelecione: ";
+          cin >> uni;
+          if (uni == 1){
+            if (nota >= 520){
+            lista_artesuni1[contartes1] = lista_alunos[cont]; // ADICIONA ESTUDANTE À LISTA DE CANDIDATURAS EM PSICOLOGIA MG
+            cont++;
+            contartes1++;
+          }
+          nota_corte(nota, 520);
+        } else if (uni == 2){
+            if (nota >= 530){
+            lista_artesuni2[contartes2] = lista_alunos[cont]; // ADICIONA ESTUDANTE À LISTA DE CANDIDATURAS EM ARTES MG
+            cont++;
+            contartes2++;
+          }
+          nota_corte(nota, 530);
+        }
+      }
+  }
+    }
+  } else if (opcao == 3){      // CODIGO PARA LISTAR AS CANDIDATURAS
+    cout << "\n\nDe qual estado você quer checar as candidaturas: ";
+    cout << "\n1-RS\n\n2-SP\n\n3-MG\n\nSelecione: ";
+    cin >> opcao1;
+
+    if (opcao1 == 1){          //CHECAR CANDIDATURAS DAS UNIVERSIDADES NO RS
+      cout << "Qual curso você deseja checar: ";
+      cout << "\n1-Ciência da Computação\n2-Psicologia\n3-Ed.Física\nSelecione: ";
+      cin >> curso;
+
+      if (curso == 1){
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n2-Universidade 2\nSelecione: ";
+        cin >> uni; 
+        system("clear");
+        if (uni == 1){
+          cout << "==============================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE CIÊNCIA DA COMPUTAÇÃO NA UNIVERSIDADE 1 NO RS:\n";
+            for (int i = 0; i < contccRS1; i++){ 
+            cout << "\nNome: " << lista_ccRSuni1[i]->getNome() << ". Nota: " << lista_ccRSuni1[i]->getNota() << endl;
+          } 
+          cout << "==============================================================================\n";
+        } else if (uni == 2){
+          cout << "==============================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE CIÊNCIA DA COMPUTAÇÃO NA UNIVERSIDADE 2 NO RS:\n";
+          for (int i = 0; i < contccRS2; i++){
+            cout << "Nome: " << lista_ccRSuni2[i]->getNome() << ". Nota: " << lista_ccRSuni2[i]->getNota() << endl;
+          }
+          cout << "==============================================================================\n";
+        }
+      } else if (curso == 2){   // CURSO DE PSICOLOGIA
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n2-Universidade 2\nSelecione: ";
+        cin >> uni; 
+        system("clear");
+        if (uni == 1){
+          cout << "===================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE PSICOLOGIA NA UNIVERSIDADE 1 NO RS:\n";
+          for (int i = 0; i < contpsicoRS1; i++){  // CHECAR CANDIDATURAS NA UNIVERSIDADE 1
+            cout << "Nome: " << lista_psicoRSuni1[i]->getNome() << ". Nota: " << lista_psicoRSuni1[i]->getNota() << endl;
+          }
+          cout << "===================================================================\n";
+        } else if (uni == 2){   // CHECAR CANDIDATURAS NA UNIVERSIDADE 2
+          cout << "===================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE PSICOLOGIA NA UNIVERSIDADE 2 NO RS:\n";
+          for (int i = 0; i < contpsicoRS2; i++){
+            cout << "Nome: " << lista_psicoRSuni2[i]->getNome() << ". Nota: " << lista_psicoRSuni2[i]->getNota() << endl;
+          }
+          cout << "===================================================================\n";
+        }
+      } else if (curso == 3){          // CURSO DE EDUCAÇAO FISICA  
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n2-Universidade 2\nSelecione: ";
+        cin >> uni; 
+        system("clear");
+        if (uni == 1){
+          cout << "========================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE EDUCAÇÃO FÍSICA NA UNIVERSIDADE 1 NO RS:\n";
+          for (int i = 0; i < contedfRS1; i++){    // LOOP PARA MOSTRAR A LISTA DE CANDIDATOS
+            cout << "Nome: " << lista_edfisicaRSuni1[i]->getNome() << ". Nota: " << lista_edfisicaRSuni1[i]->getNota() << endl;
+          }
+          cout << "========================================================================\n";
+        } else if (uni == 2){
+          cout << "========================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE EDUCAÇÃO FÍSICA NA UNIVERSIDADE 2 NO RS:\n";
+          for (int i = 0; i < contedfRS2; i++){    // LOOP PARA MOSTRAR A LISTA DE CANDIDATOS EM ED FISICA
+            cout << "Nome: " << lista_edfisicaRSuni2[i]->getNome() << ". Nota: " << lista_edfisicaRSuni2[i]->getNota() << endl;
+          }
+          cout << "========================================================================\n";
+        }
+      }
+    } else if (opcao1 == 2){            // CHECAR CANDIDATURAS EM UNIVERSIDADES DE SP
+      cout << "Qual curso você deseja checar: ";
+      cout << "\n1-Matemática\n2-Letras\n3-Pedagogia\nSelecione: ";
+      cin >> curso;
+
+      if (curso == 1){              // CHECAR CANDIDATURA NO CURSO DE MATEMATICA
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n2-Universidade 2\nSelecione: ";
+        cin >> uni; 
+        system("clear");
+        if (uni == 1){
+          cout << "==========================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE MATEMATICA NA UNIVERSIDADE 1 EM SÃO PAULO:\n";
+          for (int i = 0; i < contmatSP1; i++){    // LOOP PARA MOSTRAR A LISTA DE CANDIDATOS EM MATEMATICA
+            cout << "Nome: " << lista_matematicaSPuni1[i]->getNome() << ". Nota: " << lista_matematicaSPuni1[i]->getNota() << endl;
+          }
+          cout << "==========================================================================\n";
+        } else if (uni == 2){    
+          cout << "==========================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE MATEMÁTICA NA UNIVERSIDADE 2 EM SÃO PAULO:\n";
+          for (int i = 0; i < contmatSP2; i++){      // LOOP PARA MOSTRAR A LISTA DE CANDIDATOS
+            cout << "Nome: " << lista_matematicaSPuni2[i]->getNome() << ". Nota: " << lista_matematicaSPuni2[i]->getNota() << endl;
+          }
+          cout << "==========================================================================\n";
+        }
+      } else if (curso == 2){                // CHECAR CANDIDATURA NO CURSO DE LETRAS
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n2-Universidade 2\nSelecione: ";
+        cin >> uni; 
+        system("clear");
+        if (uni == 1){
+          cout << "======================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE LETRAS NA UNIVERSIDADE 1 EM SÃO PAULO:\n";
+          for (int i = 0; i < contletrasSP1; i++){    // LOOP PARA MOSTRAR A LISTA DE CANDIDATOS
+            cout << "Nome: " << lista_letrasSPuni1[i]->getNome() << ". Nota: " << lista_letrasSPuni1[i]->getNota() << endl;
+          }
+          cout << "======================================================================\n";
+        } else if (uni == 2){
+          cout << "======================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE LETRAS NA UNIVERSIDADE 2 EM SÃO PAULO:\n";
+          for (int i = 0; i < contletrasSP2; i++){    // LOOP PARA MOSTRAR A LISTA DE CANDIDATOS EM LETRAS
+            cout << "Nome: " << lista_letrasSPuni2[i]->getNome() << ". Nota: " << lista_letrasSPuni2[i]->getNota() << endl;
+          }
+          cout << "=======================================================================\n";
+        }
+      } else if (curso == 3){            // CHECAR CANDIDATURAS NO CURSO DE PEDAGOGIA
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n2-Universidade 2\nSelecione: ";
+        cin >> uni; 
+        system("clear");
+        if (uni == 1){
+          cout << "=========================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE PEDAGOGIA NA UNIVERSIDADE 1 EM SÃO PAULO:\n";
+          for (int i = 0; i < contpedagogiaSP1; i++){  // LOOP PARA MOSTRAR A LISTA DE CANDIDATOS EM PEDAGOGIA UNI 1
+            cout << "Nome: " << lista_pedagogiaSPuni1[i]->getNome() << ". Nota: " << lista_pedagogiaSPuni1[i]->getNota() << endl;
+          }
+          cout << "=========================================================================\n";
+        } else if (uni == 2){
+          cout << "=========================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE PEDAGOGIA NA UNIVERSIDADE 2 EM SÃO PAULO:\n";
+          for (int i = 0; i < contpedagogiaSP2; i++){  // LOOP PARA MOSTRAR A LISTA DE CANDIDATOS EM PEDAGOGIA UNI 2
+            cout << "Nome: " << lista_pedagogiaSPuni2[i]->getNome() << ". Nota: " << lista_pedagogiaSPuni2[i]->getNota() << endl;
+          }
+          cout << "========================================================================\n";
+        }
+      }
+    } else if (opcao1 == 3){            // CHECAR CANDIDATURAS EM UNIVERSIDADES DE MG
+      cout << "Qual curso você deseja checar: ";
+      cout << "\n1-Ciência de dados\n2-Psicologia\n3-Artes\nSelecione: ";
+      cin >> curso;
+
+      if (curso == 1){              // CHECAR CANDIDATURA NO CURSO DE CIENCIA DE DADOS
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n2-Universidade 2\nSelecione: ";
+        cin >> uni; 
+        system("clear");
+        if (uni == 1){
+          cout << "===================================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE CIÊNCIA DE DADOS NA UNIVERSIDADE 1 EM MINAS GERAIS:\n";
+          for (int i = 0; i < contcdMG1; i++){
+            cout << "Nome: " << lista_cdMGuni1[i]->getNome() << ". Nota: " << lista_cdMGuni1[i]->getNota() << endl;
+          }
+          cout << "===================================================================================\n";
+        } else if (uni == 2){
+          cout << "================================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE CIÊNCIA DE DADOS NA UNIVERSIDADE 2 MINAS GERAIS:\n";
+          for (int i = 0; i < contcdMG2; i++){
+            cout << "Nome: " << lista_cdMGuni2[i]->getNome() << ". Nota: " << lista_cdMGuni2[i]->getNota() << endl;
+          }
+          cout << "================================================================================\n";
+        }
+      } else if (curso == 2){                // CHECAR CANDIDATURA NO CURSO PSICOLOGIA EM MG
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n2-Universidade 2\nSelecione: ";
+        cin >> uni; 
+        system("clear");
+        if (uni == 1){
+          cout << "=============================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE PSICOLOGIA NA UNIVERSIDADE 1 EM MINAS GERAIS:\n";
+          for (int i = 0; i < contpsicoMG1; i++){
+            cout << "Nome: " << lista_psicoMGuni1[i]->getNome() << ". Nota: " << lista_psicoMGuni1[i]->getNota() << endl;
+          }
+          cout << "=============================================================================\n";
+        } else if (uni == 2){
+          cout << "=============================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE PSICOLOGIA NA UNIVERSIDADE 2 EM MINAS GERAIS:\n";
+          for (int i = 0; i < contpsicoMG2; i++){
+            cout << "Nome: " << lista_psicoMGuni2[i]->getNome() << ". Nota: " << lista_psicoMGuni2[i]->getNota() << endl;
+          }
+          cout << "=============================================================================\n";
+        }
+      } else if (curso == 3){            // CHECAR CANDIDATURAS NO CURSO DE ARTES 
+        cout << "\n\nUniversidades disponíveis: ";
+        cout << "\n1-Universidade 1\n2-Universidade 2\nSelecione: ";
+        cin >> uni; 
+        system("clear");
+        if (uni == 1){
+          cout << "========================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE ARTES NA UNIVERSIDADE 1 EM MINAS GERAIS:\n";
+          for (int i = 0; i < contartes1; i++){
+            cout << "Nome: " << lista_artesuni1[i]->getNome() << ". Nota: " << lista_artesuni1[i]->getNota() << endl;
+          }
+          cout << "========================================================================\n";
+        } else if (uni == 2){
+          cout << "========================================================================\n";
+          cout << "LISTA DE CANDIDATOS AO CURSO DE ARTES NA UNIVERSIDADE 2 EM MINAS GERIAS:\n";
+          for (int i = 0; i < contartes2; i++){
+            cout << "Nome: " << lista_artesuni2[i]->getNome() << ". Nota: " << lista_artesuni2[i]->getNota() << endl;
+          }
+          cout << "========================================================================\n";
+        }
+      }
+    }
+  } else {
+    cout << "OPÇÃO INVÁLIDA, TENTE NOVAMENTE";
+    system("clear");
+  }  
+}      // FINAL DO WHILE DA TELA INICIAL
+}
