@@ -1,2 +1,4 @@
 # app de Universidade
- Neste repositório está o código que utilizei para criar um protótipo de como seria um aplicativo desenvolvido para candidatar estudantes à universidades de forma mais simples e eficiente, utilizando orientação ao objeto na linguagem de C++
+ Neste repositório está o código que utilizei para criar um protótipo simples, de como seria um aplicativo desenvolvido para candidatar estudantes à universidades de forma mais simples e eficiente, utilizando programação orientada ao objeto na linguagem de C++
+
+ Dentro do aplicativo, é indispensável registrar um usuário para que ele possa efetuar o login. Durante o cadastro, o usuário deve inserir sua pontuação no ENEM (que pode ser modificada posteriormente ao editar o perfil). Após realizar o login, o estudante seleciona o estado e o curso desejado. Nesse ponto, o sistema apresenta uma lista das universidades disponíveis para ingresso, levando em consideração a nota do usuário. Caso a pontuação do usuário não seja suficiente para entrar em uma determinada universidade, essa universidade não será exibida na lista.
